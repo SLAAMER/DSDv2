@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { SessionService } from './services/session/session.service';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -13,27 +15,48 @@ export class AppComponent {
     {
       title: 'Home',
       url: '/home',
-      icon: 'home'
+      icon: 'analytics'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
+      title: 'Simulator',
+      url: '/simulator',
+      icon: 'medkit'
+    },
+    {
+      title: 'Layout',
+      url: '/layout',
+      icon: 'easel'
+    },
+    {
+      title: 'Log Out',
+      url: '/login',
+      icon: 'log-out'
     }
   ];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private session: SessionService,
+    private router: Router
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+
+      this.session.getSession().then((session)=>{
+        if(!session){
+          this.session.session = session;
+          this.router.navigateByUrl('/login').then(()=>{
+            this.statusBar.styleDefault();
+            this.splashScreen.hide();
+          });
+        }
+      });
+      
     });
   }
 }

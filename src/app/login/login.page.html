@@ -1,0 +1,121 @@
+<ion-content padding>
+
+  <ion-card>
+    <ion-card-header>
+      <img src="../../assets/imgs/dsd-logo.png">
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="form" (ngSubmit)="submitLoginHandler()" *ngIf="!willRegister">
+
+        <ion-item>
+
+          <mat-form-field>
+            <input matInput type="email" placeholder="Email" formControlName="email">
+
+            <mat-error *ngIf="email.invalid && email.touched">
+              Invalid email address
+            </mat-error>
+          </mat-form-field>
+
+        </ion-item>
+
+        <ion-item>
+
+          <mat-form-field>
+            <input matInput type="password" placeholder="Password" formControlName="password">
+
+            <mat-hint align="end">
+              Atleast 8 characters long
+            </mat-hint>
+          </mat-form-field>
+
+        </ion-item>
+
+        <ion-item>
+
+          <ion-button fill="outline" (click)="register()">Register</ion-button>
+
+          <ion-button type="submit" [disabled]="form.invalid">Log In
+            <ion-icon name="log-in" slot="end"></ion-icon>
+          </ion-button>
+
+        </ion-item>
+
+      </form>
+
+      <form [formGroup]="registerForm" (ngSubmit)="submitRegisterHandler()" *ngIf="willRegister">
+
+        <ion-item>
+
+          <mat-form-field>
+            <input matInput type="text" placeholder="Name" formControlName="name">
+
+            <mat-error *ngIf="name.invalid && name.touched">
+              Please identify yourself
+            </mat-error>
+          </mat-form-field>
+
+        </ion-item>
+
+        <ion-item>
+
+          <mat-form-field>
+            <input matInput type="email" placeholder="Email" formControlName="email">
+
+            <mat-error *ngIf="email.invalid && email.touched">
+              Invalid email address
+            </mat-error>
+          </mat-form-field>
+
+        </ion-item>
+
+        <ion-item>
+
+          <mat-form-field>
+            <input matInput type="password" placeholder="Password" formControlName="password">
+
+            <mat-hint align="end">
+              Atleast 8 characters long
+            </mat-hint>
+          </mat-form-field>
+
+        </ion-item>
+
+        <ion-item>
+
+          <mat-form-field>
+            <input matInput type="password" placeholder="Password Confirmation" formControlName="password2">
+
+
+            <mat-error *ngIf="password2.errors?.MatchPassword">
+              Password does not match
+            </mat-error>
+          </mat-form-field>
+
+        </ion-item>
+
+        <ion-item>
+
+          <mat-form-field>
+            <input matInput [matDatepicker]="dp" placeholder="Date of Birth" formControlName="dateOfBirth">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp disabled="false"></mat-datepicker>
+          </mat-form-field>
+
+        </ion-item>
+
+        <ion-item>
+
+          <ion-button fill="outline" (click)="register()">Never mind! Go to login!</ion-button>
+
+          <ion-button type="submit" [disabled]="registerForm.invalid">Register
+            <ion-icon name="log-in" slot="end"></ion-icon>
+          </ion-button>
+
+        </ion-item>
+
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
